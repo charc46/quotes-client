@@ -1,0 +1,32 @@
+.container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 15px;
+  background-color: darkslategray;
+  color: white;
+
+}
+
+.link {
+  color: white;
+  opacity: .6;
+
+  &:hover {
+    opacity: 1;
+    color: white;
+  }
+}
+
+@media(max-width: 500px) {
+  .container {
+    height: 25px;
+    margin: 0;
+    padding: 5px;
+  }
+
+  p {
+    font-size: 60%;
+  }
+}
