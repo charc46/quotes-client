@@ -1,12 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import * as footerStyles from './styles/footer.module.scss'
 
 const Footer = () => {
   return (
     <div className={footerStyles.container}>
-      <p>Created by <Link to='https://www.charlescrane.co.uk' className={footerStyles.link}>Charles Crane</Link></p>
+      <p>Created by <a href='https://www.charlescrane.co.uk' target='blank' rel='noreferrer' className={footerStyles.link}>Charles Crane</a></p>
     </div>
   )
 }

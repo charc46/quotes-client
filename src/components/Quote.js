@@ -6,15 +6,15 @@ import { IoRefresh } from 'react-icons/io5'
 import { fetchQuotes } from '../actions'
 import * as quoteStyles from './styles/quote.module.scss'
 
-const Quote = ({ fetchQuotes, quotes }) => {
+const Quote = ({ fetchQuotes, quotes, token }) => {
   const [number, setNumber] = useState(Math.floor(Math.random() * quotes.length))
 
   useEffect(() => {
     const getQuotes = async () => {
-      await fetchQuotes(localStorage.getItem('token'))
+      await fetchQuotes(token)
     }
     getQuotes()
-  }, [fetchQuotes])
+  }, [fetchQuotes, token])
 
   const newQuote = () => {
     setNumber(Math.floor(Math.random() * quotes.length))
@@ -55,7 +55,7 @@ const Quote = ({ fetchQuotes, quotes }) => {
 const mapStateToProps = state => {
   return {
     quotes: state.quotes.quotes,
-    user: state.currentUser
+    user: state.users.user
   }
 }
 

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import * as newStyles from './styles/newQuote.module.scss'
 
-const NewQuote = ({ createQuote, token, quotes }) => {
+const NewQuote = ({ createQuote, token, quotes, user }) => {
   const [quoteQuote, setQuoteQuote] = useState('')
   const [quoteSource, setQuoteSource] = useState('')
 
@@ -17,14 +17,20 @@ const NewQuote = ({ createQuote, token, quotes }) => {
   if(quotes.length === 0) {
     return (
       <div>
-        <h4>Add your first quote here! Your quotes will be displayed randomly each time you open a new tab!</h4>
-        <form onSubmit={handleSubmit}>
-          <h3>Add a new quote</h3>
-          <input type="text" value={quoteQuote} onChange={e => setQuoteQuote(e.target.value)}/>
-          <input type="text" value={quoteSource} onChange={e => setQuoteSource(e.target.value)}/>
-          <button>Create</button>
-        </form>
-        <p><Link to='/quotes'>Back to your quotes</Link></p>
+        <h3 className={newStyles.firstquote}>Add your first quote here {`${user.username}`}! Your quotes will be displayed randomly each time you open a new tab!</h3>
+        <div className={newStyles.container}>
+          <form onSubmit={handleSubmit} className={`ui form ${newStyles.form}`}>
+            <h3>Add a new quote</h3>
+            <div className='field'>
+              <textarea value={quoteQuote} placeholder='A quote you would like to remember...' onChange={e => setQuoteQuote(e.target.value)} className={newStyles.quote}/>
+            </div>
+            <div className='field'>
+              <input type="text" value={quoteSource} placeholder='The wise one who said it..' onChange={e => setQuoteSource(e.target.value)}/>
+            </div>
+            <button className='ui button'>Create</button>
+          </form>
+          <p><Link to='/'>Cancel</Link></p>
+        </div>
       </div>
     )
   }
@@ -49,7 +55,8 @@ const NewQuote = ({ createQuote, token, quotes }) => {
 const mapStateToProps = state => {
   return {
     quotes: state.quotes.quotes,
-    token: state.users.token
+    token: state.users.token,
+    user: state.users.user
   }
 }
 

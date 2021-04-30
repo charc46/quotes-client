@@ -6,6 +6,11 @@
   height: 70%;
 }
 
+.firstquote {
+  text-align: center;
+  padding-top: 25px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -45,5 +50,11 @@
     h3 {
       font-size: 95%;
     }
+  }
+
+  .firstquote {
+    font-size: 90%;
+    width: 80%;
+    margin: 0 auto;
   }
 }

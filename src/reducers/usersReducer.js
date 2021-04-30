@@ -9,6 +9,8 @@ export default (state = initialState, action) => {
       return { ...state, user: action.payload, token: `${action.payload.token}` }
     case 'LOGOUT':
       return { ...state, user: null}
+    case 'CREATE_USER':
+      return { ...state, user: action.payload.user, token: action.payload.token }
     case 'GET_USER':
       return { ...state, user: action.payload.user, token: action.payload.token }
     case 'UPDATE_USER':

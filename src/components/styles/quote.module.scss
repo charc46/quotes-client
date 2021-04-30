@@ -59,7 +59,16 @@ hr {
       background-color: white;
       animation: spin 1s;
     }
+
+    &:focus {
+      background-color: white;
+    }
   }
+}
+
+.loading {
+  text-align: center;
+  margin: 15px 0;
 }
 
 

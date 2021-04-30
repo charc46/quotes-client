@@ -1,10 +1,11 @@
 import axios from 'axios'
 import history from '../history'
 
+const url = 'https://crane-quotable-api.herokuapp.com'
 
 // User Actions
 export const login = (email, password) => async dispatch => {
-  const res = await axios.post('http://localhost:3001/users/login', {
+  const res = await axios.post(`${url}/users/login`, {
       email,
       password, 
   })
@@ -16,7 +17,7 @@ export const login = (email, password) => async dispatch => {
 }
 
 export const logout = (token) => async (dispatch) => {
-  const res = await axios.post('http://localhost:3001/users/logout', {}, {
+  const res = await axios.post(`${url}/users/logout`, {}, {
     headers: {
       Authorization: `Bearer ${token}` 
     }
@@ -29,20 +30,20 @@ export const logout = (token) => async (dispatch) => {
 }
 
 export const createUser = (username, email, password) => async dispatch => {
-  const res = await axios.post('http://localhost:3001/users', {
+  const res = await axios.post(`${url}/users`, {
     username,
     email,
     password
-  })
+  }, { withCredentials: true })
 
   localStorage.setItem('token', res.data.token)
 
   dispatch({ type: 'CREATE_USER', payload: res.data})
-  history.push('/quotes/new')
+  window.location.href = '/quotes/new'
 }
 
 export const fetchUser = (token) => async dispatch => {
-  const res = await axios.get('http://localhost:3001/users/me', {
+  const res = await axios.get(`${url}/users/me`, {
     headers: {
       Authorization: `Bearer ${token}` 
     }
@@ -54,7 +55,7 @@ export const fetchUser = (token) => async dispatch => {
 // User enters new details for required updates, password set to current password by default
 // User gets authenticated via jwt but current password is required to make changes
 export const updateUser = (token, username, email, currentPassword, password) => async dispatch => {
-  const res = await axios.patch('http://localhost:3001/users/me', {
+  const res = await axios.patch(`${url}/users/me`, {
     username,
     email,
     password: password || currentPassword,
@@ -73,7 +74,7 @@ export const updateUser = (token, username, email, currentPassword, password) =>
 
 // Quote actions
 export const createQuote = (token, quote, source) => async dispatch => {
-  const res = await axios.post('http://localhost:3001/quotes', {
+  const res = await axios.post(`${url}/quotes`, {
     quote,
     source
   }, {
@@ -87,7 +88,7 @@ export const createQuote = (token, quote, source) => async dispatch => {
 }
 
 export const fetchQuotes = (token) => async (dispatch) => {
-  const res = await axios.get('http://localhost:3001/quotes', {
+  const res = await axios.get(`${url}/quotes`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -97,7 +98,7 @@ export const fetchQuotes = (token) => async (dispatch) => {
 }
 
 export const fetchQuote = (token, id) => async dispatch => {
-  const res = await axios.get(`http://localhost:3001/quotes/${id}`, {
+  const res = await axios.get(`${url}/quotes/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -107,7 +108,7 @@ export const fetchQuote = (token, id) => async dispatch => {
 }
 
 export const updateQuote = (token, quote, source, id) => async dispatch => {
-  const res = await axios.patch(`http://localhost:3001/quotes/${id}`, {
+  const res = await axios.patch(`${url}/quotes/${id}`, {
     quote,
     source
   }, {
@@ -121,7 +122,7 @@ export const updateQuote = (token, quote, source, id) => async dispatch => {
 }
 
 export const deleteQuote = (token, id) => async dispatch => {
-  const res = await axios.delete(`http://localhost:3001/quotes/${id}`, {
+  const res = await axios.delete(`${url}/quotes/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

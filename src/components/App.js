@@ -43,7 +43,7 @@ const App = (props) => {
     <Router history={history}>
       <Layout>
         <Switch>
-          <Route path='/' exact component={Quote} />
+          <Route path='/' exact component={() => <Quote token={token} />} />
           <Route path='/register' exact component={Register} />
           <Route path='/profile' exact component={Profile} />
           <Route path='/profile/edit' exact component={EditProfile} />
@@ -57,7 +57,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     currentUser: state.users.user,
     token: localStorage.getItem('token')

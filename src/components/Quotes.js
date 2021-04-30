@@ -16,14 +16,14 @@ const Quotes = ({ token, quotes, fetchQuotes, deleteQuote }) => {
   const handleDelete = async (id) => {
     let check = window.confirm("Are you sure?")
     if(!check) return
-    deleteQuote(token, id)
+    await deleteQuote(token, id)
     await fetchQuotes(token)
   }
 
   if(quotes.length < 1) {
     return (
-      <div>
-        <div>Loading..</div>
+      <div className={quotesStyles.container}>
+        <div>Not much here..</div>
         <Link to='/quotes/new' className='ui button primary'>Add new quote</Link>
       </div>
     )
@@ -53,6 +53,7 @@ const Quotes = ({ token, quotes, fetchQuotes, deleteQuote }) => {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     quotes: state.quotes.quotes,
     token: state.users.token
